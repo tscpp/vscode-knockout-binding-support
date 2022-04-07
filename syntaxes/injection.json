@@ -34,36 +34,7 @@
 							"name": "meta.embedded.line.js",
 							"patterns": [
 								{
-									"begin": "\"",
-									"beginCaptures": {
-										"0": {
-											"name": "punctuation.definition.string.begin.html"
-										}
-									},
-									"contentName": "meta.objectliteral.ts",
-									"end": "(\")",
-									"endCaptures": {
-										"0": {
-											"name": "punctuation.definition.string.end.html"
-										},
-										"1": {
-											"name": "source.ts-ignored-vscode"
-										}
-									},
-									"patterns": [
-										{
-											"captures": {
-												"0": {
-													"patterns": [
-														{
-															"include": "source.ts#object-member"
-														}
-													]
-												}
-											},
-											"match": "([^\\n\"/]|/(?![/*]))+"
-										}
-									]
+									"include": "#binding-attribute-value"
 								}
 							]
 						},
@@ -72,6 +43,81 @@
 							"name": "invalid.illegal.unexpected-equals-sign.html"
 						}
 					]
+				}
+			]
+		},
+		"binding-attribute-value": {
+			"patterns": [
+				{
+					"begin": "\"",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.begin.html"
+						}
+					},
+					"contentName": "meta.objectliteral.ts",
+					"end": "(\")",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.end.html"
+						},
+						"1": {
+							"name": "source.ts-ignored-vscode"
+						}
+					},
+					"patterns": [
+						{
+							"captures": {
+								"0": {
+									"patterns": [
+										{
+											"include": "#binding-inner"
+										}
+									]
+								}
+							},
+							"match": "([^\\n\"/]|/(?![/*]))+"
+						}
+					]
+				},
+				{
+					"begin": "'",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.begin.html"
+						}
+					},
+					"contentName": "meta.objectliteral.ts",
+					"end": "(')",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.end.html"
+						},
+						"1": {
+							"name": "source.ts-ignored-vscode"
+						}
+					},
+					"patterns": [
+						{
+							"captures": {
+								"0": {
+									"patterns": [
+										{
+											"include": "#binding-inner"
+										}
+									]
+								}
+							},
+							"match": "([^\\n'/]|/(?![/*]))+"
+						}
+					]
+				}
+			]
+		},
+		"binding-inner": {
+			"patterns": [
+				{
+					"include": "source.ts#object-member"
 				}
 			]
 		}
