@@ -74,54 +74,6 @@
 					]
 				}
 			]
-		},
-		"q": {
-			"name": "string.quoted.double.ts",
-			"begin": "\"",
-			"beginCaptures": {
-				"0": {
-					"name": "punctuation.definition.string.begin.ts"
-				}
-			},
-			"end": "(\")|((?:[^\\\\\\n])$)",
-			"endCaptures": {
-				"1": {
-					"name": "punctuation.definition.string.end.ts"
-				},
-				"2": {
-					"name": "invalid.illegal.newline.ts"
-				}
-			},
-			"patterns": [
-				{
-					"begin": "(\\S+)\\s*(:)",
-					"beginCaptures": {
-						"1": {
-							"name": "meta.object-literal.key.ts"
-						},
-						"2": {
-							"name": "punctuation.separator.key-value.ts"
-						}
-					},
-					"patterns": [
-						{
-							"include": "source.ts#expressionWithoutIdentifiers"
-						},
-						{
-							"include": "source.ts#identifiers"
-						},
-						{
-							"include": "source.ts#punctuation-accessor"
-						}
-					],
-					"end": "\\s*(,)\\s*|(?=\\s*\")",
-					"endCaptures": {
-						"1": {
-							"name": "punctuation.separator.key-value.ts"
-						}
-					}
-				}
-			]
 		}
 	}
 }
