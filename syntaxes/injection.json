@@ -1,0 +1,127 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"scopeName": "knockout.injection",
+	"injectionSelector": "L:text.html",
+	"patterns": [
+		{
+			"include": "#data-bind-attribute"
+		}
+	],
+	"repository": {
+		"data-bind-attribute": {
+			"begin": "data-bind(?![\\w:-])",
+			"beginCaptures": {
+				"0": {
+					"name": "entity.other.attribute-name.html"
+				}
+			},
+			"comment": "HTML5 attributes, event handlers",
+			"end": "(?=\\s*+[^=\\s])",
+			"name": "meta.attribute.event-handler.$1.html",
+			"patterns": [
+				{
+					"begin": "=",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.separator.key-value.html"
+						}
+					},
+					"end": "(?<=[^\\s=])(?!\\s*=)|(?=/?>)",
+					"patterns": [
+						{
+							"begin": "(?=[^\\s=<>`/]|/(?!>))",
+							"end": "(?!\\G)",
+							"name": "meta.embedded.line.js",
+							"patterns": [
+								{
+									"begin": "\"",
+									"beginCaptures": {
+										"0": {
+											"name": "punctuation.definition.string.begin.html"
+										}
+									},
+									"contentName": "meta.objectliteral.ts",
+									"end": "(\")",
+									"endCaptures": {
+										"0": {
+											"name": "punctuation.definition.string.end.html"
+										},
+										"1": {
+											"name": "source.ts-ignored-vscode"
+										}
+									},
+									"patterns": [
+										{
+											"captures": {
+												"0": {
+													"patterns": [
+														{
+															"include": "source.ts#object-member"
+														}
+													]
+												}
+											},
+											"match": "([^\\n\"/]|/(?![/*]))+"
+										}
+									]
+								}
+							]
+						},
+						{
+							"match": "=",
+							"name": "invalid.illegal.unexpected-equals-sign.html"
+						}
+					]
+				}
+			]
+		},
+		"q": {
+			"name": "string.quoted.double.ts",
+			"begin": "\"",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.definition.string.begin.ts"
+				}
+			},
+			"end": "(\")|((?:[^\\\\\\n])$)",
+			"endCaptures": {
+				"1": {
+					"name": "punctuation.definition.string.end.ts"
+				},
+				"2": {
+					"name": "invalid.illegal.newline.ts"
+				}
+			},
+			"patterns": [
+				{
+					"begin": "(\\S+)\\s*(:)",
+					"beginCaptures": {
+						"1": {
+							"name": "meta.object-literal.key.ts"
+						},
+						"2": {
+							"name": "punctuation.separator.key-value.ts"
+						}
+					},
+					"patterns": [
+						{
+							"include": "source.ts#expressionWithoutIdentifiers"
+						},
+						{
+							"include": "source.ts#identifiers"
+						},
+						{
+							"include": "source.ts#punctuation-accessor"
+						}
+					],
+					"end": "\\s*(,)\\s*|(?=\\s*\")",
+					"endCaptures": {
+						"1": {
+							"name": "punctuation.separator.key-value.ts"
+						}
+					}
+				}
+			]
+		}
+	}
+}

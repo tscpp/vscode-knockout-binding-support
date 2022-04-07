@@ -1,0 +1,34 @@
+{
+	"name": "knockout-binding-support",
+	"displayName": "Knockout Binding Support",
+	"version": "0.1.0",
+	"description": "Provides support for Knockout bindings in HTML files.",
+	"categories": [
+		"Programming Languages"
+	],
+	"keywords": [
+		"knockout",
+		"ko",
+		"binding",
+		"syntax highliting"
+	],
+	"repository": "https://github.com/tscpp/vscode-knockout-binding-support",
+	"license": "MIT",
+	"author": "Elias Skogevall",
+	"publisher": "tscpp",
+	"contributes": {
+		"grammars": [
+			{
+				"path": "./syntaxes/injection.json",
+				"scopeName": "knockout.injection",
+				"injectTo": [
+					"text.html.basic",
+					"text.html.derivative"
+				]
+			}
+		]
+	},
+	"engines": {
+		"vscode": "^1.63.0"
+	}
+}
