@@ -34,36 +34,7 @@
 							"name": "meta.embedded.line.js",
 							"patterns": [
 								{
-									"begin": "\"",
-									"beginCaptures": {
-										"0": {
-											"name": "punctuation.definition.string.begin.html"
-										}
-									},
-									"contentName": "meta.objectliteral.ts",
-									"end": "(\")",
-									"endCaptures": {
-										"0": {
-											"name": "punctuation.definition.string.end.html"
-										},
-										"1": {
-											"name": "source.ts-ignored-vscode"
-										}
-									},
-									"patterns": [
-										{
-											"captures": {
-												"0": {
-													"patterns": [
-														{
-															"include": "source.ts#object-member"
-														}
-													]
-												}
-											},
-											"match": "([^\\n\"/]|/(?![/*]))+"
-										}
-									]
+									"include": "#binding-attribute-value"
 								}
 							]
 						},
@@ -75,51 +46,78 @@
 				}
 			]
 		},
-		"q": {
-			"name": "string.quoted.double.ts",
-			"begin": "\"",
-			"beginCaptures": {
-				"0": {
-					"name": "punctuation.definition.string.begin.ts"
-				}
-			},
-			"end": "(\")|((?:[^\\\\\\n])$)",
-			"endCaptures": {
-				"1": {
-					"name": "punctuation.definition.string.end.ts"
-				},
-				"2": {
-					"name": "invalid.illegal.newline.ts"
-				}
-			},
+		"binding-attribute-value": {
 			"patterns": [
 				{
-					"begin": "(\\S+)\\s*(:)",
+					"begin": "\"",
 					"beginCaptures": {
-						"1": {
-							"name": "meta.object-literal.key.ts"
+						"0": {
+							"name": "punctuation.definition.string.begin.html"
+						}
+					},
+					"contentName": "meta.objectliteral.ts",
+					"end": "(\")",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.end.html"
 						},
-						"2": {
-							"name": "punctuation.separator.key-value.ts"
+						"1": {
+							"name": "source.ts-ignored-vscode"
 						}
 					},
 					"patterns": [
 						{
-							"include": "source.ts#expressionWithoutIdentifiers"
-						},
-						{
-							"include": "source.ts#identifiers"
-						},
-						{
-							"include": "source.ts#punctuation-accessor"
+							"captures": {
+								"0": {
+									"patterns": [
+										{
+											"include": "#binding-inner"
+										}
+									]
+								}
+							},
+							"match": "([^\\n\"/]|/(?![/*]))+"
 						}
-					],
-					"end": "\\s*(,)\\s*|(?=\\s*\")",
+					]
+				},
+				{
+					"begin": "'",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.begin.html"
+						}
+					},
+					"contentName": "meta.objectliteral.ts",
+					"end": "(')",
 					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.end.html"
+						},
 						"1": {
-							"name": "punctuation.separator.key-value.ts"
+							"name": "source.ts-ignored-vscode"
 						}
-					}
+					},
+					"patterns": [
+						{
+							"captures": {
+								"0": {
+									"patterns": [
+										{
+											"include": "#binding-inner"
+										}
+									]
+								}
+							},
+							"match": "([^\\n'/]|/(?![/*]))+"
+						}
+					]
+				}
+			]
+		},
+		"binding-inner": {
+			"patterns": [
+				{
+					"include": "source.ts#object-member"
 				}
 			]
 		}
