@@ -3,6 +3,7 @@
 	"displayName": "Knockout Binding Support",
 	"version": "0.1.0",
 	"description": "Provides support for Knockout bindings in HTML files.",
+	"icon": "assets/icon_x128.png",
 	"categories": [
 		"Programming Languages"
 	],
